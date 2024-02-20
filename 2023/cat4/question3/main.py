@@ -71,7 +71,9 @@ for t in range(test_cases):
 
   while len(solo_nodes) > 0:
     solo_node = solo_nodes.pop()
-    to_visit.remove(solo_node)
+
+    if solo_node in to_visit:
+      to_visit.remove(solo_node)
 
     prev_node = None
     length = 1
@@ -80,24 +82,21 @@ for t in range(test_cases):
     while travel:
       new_connections = connections[solo_node]
 
-      if len(new_connections) > 2:
-        solo_node = prev_node
-        length -= 1
-        travel = False
-        continue
-
-      if solo_node in to_visit:
-        to_visit.remove(solo_node)
-
       for node in new_connections:
         if prev_node != node:
           prev_node = solo_node
-          solo_node = node
-          if len(connections[solo_node]) == 1:
-            travel = False
+          new_node = node
           break
 
-      length += 1
+      if len(connections[new_node]) <= 2:
+        length += 1
+        solo_node = new_node
+
+      if len(connections[new_node]) != 2:
+        travel = False
+
+      if solo_node in to_visit:
+        to_visit.remove(solo_node)
 
     chains.setdefault(solo_node, 0)
     chains[solo_node] = length
