@@ -40,7 +40,7 @@ require('lazy').setup({
 })
 
 -- Setup colorscheme
-vim.cmd.colorscheme('rose-pine-moon')
+vim.cmd.colorscheme('murphy')
 
 local cmp = require('cmp')
 cmp.setup({
@@ -71,7 +71,7 @@ lspconfig.clangd.setup({
   filetypes = { 'cpp', 'c' },
   capabilities = cmp_capabilities
 })
-
+lspconfig.pyright.setup({})
 
 local telescope_builtin = require('telescope.builtin')
 
