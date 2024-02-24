@@ -1,5 +1,6 @@
 
 class DisjointSetList:
+
   def __init__(self, size):
     self.parent = [i for i in range(size)]
     self.rank = [0] * size
@@ -43,6 +44,7 @@ class DisjointSetList:
       self.rank[jrep] += 1
 
 class DisjointSetDict:
+
   def __init__(self, nodes):
     self.parent = {i : i for i in nodes}
     self.rank = {i : 0 for i in nodes}
