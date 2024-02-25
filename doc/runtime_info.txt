@@ -1,0 +1,7 @@
+#########################################################################
+The allowed runtimes are different for every programming language. Here I
+gathered some ball park numbers after testing
+#########################################################################
+
+Python3 : Less than 10 seconds
+C++ : Less than 10 seconds

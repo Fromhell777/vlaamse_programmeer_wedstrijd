@@ -1,3 +1,5 @@
 *.sw[pomn]
 objects*/
 test.txt
+cmaMakefile*
+program
