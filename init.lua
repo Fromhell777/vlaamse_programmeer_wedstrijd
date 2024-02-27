@@ -27,9 +27,9 @@ require('lazy').setup({
   {
     'hrsh7th/nvim-cmp',   -- Autocompletion plugin
     dependencies = {
-	    'hrsh7th/cmp-nvim-lsp',  -- LSP support for autocompletion
-	    'L3MON4D3/LuaSnip',
-	    'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lsp',  -- LSP support for autocompletion
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
   },
   {
@@ -44,16 +44,16 @@ vim.cmd.colorscheme('murphy')
 
 local cmp = require('cmp')
 cmp.setup({
-	sources = cmp.config.sources({
-		{ name = 'nvim-lsp' }
-	}, {
-	  { name = 'buffer' }
-	}),
-	snippet = {
-	  expand = function(args)
-		require('luasnip').lsp_expand(args.body)
-	  end
-	}
+  sources = cmp.config.sources({
+    { name = 'nvim-lsp' }
+  }, {
+    { name = 'buffer' }
+  }),
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end
+  }
 })
 
 
@@ -79,6 +79,14 @@ local find_all_files = function()
   telescope_builtin.find_files({no_ignore=true, hidden=true})
 end
 
+-- Set indent width for Python
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+  end
+})
+
 -- Configure custom keybindings
 vim.g.mapleader = ' '
 vim.keymap.set('n', '<Leader>dn', vim.diagnostic.goto_next, {})
@@ -89,3 +97,7 @@ vim.keymap.set('n', '<Leader>ff', telescope_builtin.find_files, {})
 vim.keymap.set('n', '<Leader>af', find_all_files, {})
 
 vim.keymap.set('n', '<Leader>lrf', vim.lsp.buf.format, {})
+
+vim.keymap.set('n', '<F1>', ':bp<CR>', {})
+vim.keymap.set('n', '<F2>', ':bn<CR>', {})
+vim.keymap.set('n', '<F3>', ':b#<CR>', {})
