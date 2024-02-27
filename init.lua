@@ -25,9 +25,9 @@ require('lazy').setup({
   'folke/which-key.nvim',
   'neovim/nvim-lspconfig',
   {
-    'hrsh7th/nvim-cmp',   -- Autocompletion plugin
+    'hrsh7th/nvim-cmp', -- Autocompletion plugin
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',  -- LSP support for autocompletion
+      'hrsh7th/cmp-nvim-lsp', -- LSP support for autocompletion
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
     },
@@ -37,10 +37,92 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   { 'rose-pine/neovim', name = 'rose-pine' },
+  "rgroli/other.nvim", -- Cycle between related files (like a.vim or Alternate)
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+  },
+  {
+    "nvim-lualine/lualine.nvim", -- Pretty cool status line
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = true
+  },
+  {
+    "ojroques/nvim-bufdel", -- Better buffer deletion
+    opts = {
+      next = 'cycle',       -- Cycle through buffers according to their index
+      quit = false,         -- Quit when last buffer is closed
+    }
+  },
 })
 
 -- Setup colorscheme
 vim.cmd.colorscheme('murphy')
+
+-- Setup status line
+require('lualine').setup()
+
+-- Setup plugin to open related file
+require("other-nvim").setup({
+  rememberBuffers = false,
+  mappings = {
+    {
+      pattern = "(.*).h$",
+      target = {
+    {
+      target = "%1.C",
+      context = "default"
+    },
+    {
+      target = "%1.tpp",
+      context = "template"
+    },
+      }
+    },
+    {
+      pattern = "(.*).C$",
+      target = {
+    {
+      target = "%1.h",
+      context = "default"
+    },
+    {
+      target = "%1.tpp",
+      context = "template"
+    },
+      }
+    },
+    {
+      pattern = "(.*).tpp$",
+      target = {
+    {
+      target = "%1.h",
+      context = "default"
+    },
+    {
+      target = "%1.C",
+      context = "template"
+    },
+      }
+    },
+    {
+      pattern = "(.*)_ent.vhd",
+      target = "%1_rtl.chd",
+    },
+    {
+      pattern = "(.*)_rtl.vhd",
+      target = "%1_ent.chd",
+    }
+  }
+})
 
 local cmp = require('cmp')
 cmp.setup({
@@ -98,6 +180,15 @@ vim.keymap.set('n', '<Leader>af', find_all_files, {})
 
 vim.keymap.set('n', '<Leader>lrf', vim.lsp.buf.format, {})
 
-vim.keymap.set('n', '<F1>', ':bp<CR>', {})
-vim.keymap.set('n', '<F2>', ':bn<CR>', {})
-vim.keymap.set('n', '<F3>', ':b#<CR>', {})
+vim.keymap.set('n', '<F1>', ":bp<CR>", {})
+vim.keymap.set('n', '<F2>', ":bn<CR>", {})
+vim.keymap.set('n', '<F3>', ":b#<CR>", {})
+
+vim.keymap.set('n', '<F4>', ":cd dirname %<CR>")
+
+vim.keymap.set('c', "bd<CR>", "BufDel<CR>")
+
+-- Comment.nvim keybindings
+local comment_api = require('Comment.api')
+vim.keymap.set('n', '<Leader>/', comment_api.toggle.linewise.current)
+vim.keymap.set('x', '<Leader>/', '<Plug>(comment_toggle_linewise_visual)')
