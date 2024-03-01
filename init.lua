@@ -180,6 +180,9 @@ vim.keymap.set('n', '<Leader>af', find_all_files, {})
 
 vim.keymap.set('n', '<Leader>lrf', vim.lsp.buf.format, {})
 
+-- Vim behaviour of yank of a line
+vim.keymap.set('n', 'Y', "yy")
+
 vim.keymap.set('n', '<F1>', ":bp<CR>", {})
 vim.keymap.set('n', '<F2>', ":bn<CR>", {})
 vim.keymap.set('n', '<F3>', ":b#<CR>", {})
