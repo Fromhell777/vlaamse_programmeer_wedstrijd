@@ -1,39 +1,44 @@
 
-test_cases = int(input())
-
-for t in range(test_cases):
-
-  num_streets, num_cross = [int(x) for x in input().split()]
+def traveling_salesman():
 
   graph = {}
   costs = {}
   required = set()
 
-  for _ in range(num_streets):
-    cross0, cross1, cost, hit = [int(x) for x in input().split()]
+  graph = {1 : [2, 3, 4],
+           2 : [1, 5],
+           3 : [1, 6],
+           4 : [1],
+           5 : [2, 7],
+           6 : [3],
+           7 : [5]}
 
-    graph.setdefault(cross0, [])
-    graph.setdefault(cross1, [])
-    graph[cross0].append(cross1)
-    graph[cross1].append(cross0)
+  costs = {(1, 2) : 4,
+           (2, 1) : 4,
+           (1, 3) : 3,
+           (3, 1) : 3,
+           (1, 4) : 2,
+           (4, 1) : 2,
+           (2, 5) : 5,
+           (5, 2) : 5,
+           (3, 6) : 4,
+           (6, 3) : 4,
+           (5, 7) : 1,
+           (7, 5) : 1}
 
-    costs[(cross0, cross1)] = cost
-    costs[(cross1, cross0)] = cost
+  # These streets are required to be hit
+  required = set([(1, 2),
+                  (1, 4),
+                  (3, 6)])
 
-    if hit:
-      if cross0 < cross1:
-        required.add((cross0, cross1))
-      else:
-        required.add((cross1, cross0))
-
-  start_cross = int(input())
+  start_cross = 3
 
   min_cost = 1e30
   curr_cost = 0
 
   def shortest_route(travelled, curr_cross):
-    global min_cost
-    global curr_cost
+    nonlocal min_cost
+    nonlocal curr_cost
 
     copy_cost = curr_cost
 
@@ -64,5 +69,3 @@ for t in range(test_cases):
           travelled.remove((curr_cross, new_cross))
 
   shortest_route(set(), start_cross)
-
-  print(f"{t + 1} {min_cost}")
