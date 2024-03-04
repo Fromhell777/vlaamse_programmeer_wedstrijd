@@ -1,3 +1,7 @@
+export DESIGN_WORK_DIR=`pwd`
+
+alias cw='cd $DESIGN_WORK_DIR'
+
 alias run_opgave='python3 main.py < opgave.invoer'
 alias run_voorbeeld='python3 main.py < voorbeeld.invoer'
 alias run_wedstrijd='python3 main.py < wedstrijd.invoer'
