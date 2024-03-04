@@ -126,7 +126,7 @@ def knapsack_0_1_bottom_up1(weights, values, max_weight, num_items):
 
 def knapsack_0_1_bottom_up_space_efficient(weights, values, max_weight, num_items):
   # Making the dp array
-  dp = [(0, []) for i in range(max_weight + 1)]
+  dp = [(0, []) for _ in range(max_weight + 1)]
 
   # Taking first i elements
   for i in range(1, num_items + 1):
