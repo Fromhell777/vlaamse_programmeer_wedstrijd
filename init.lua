@@ -191,7 +191,14 @@ vim.keymap.set('n', '<F4>', ":cd dirname %<CR>")
 
 vim.keymap.set('c', "bd<CR>", "BufDel<CR>")
 
+-- Trim trailing whitespaces
+vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]])
+
 -- Comment.nvim keybindings
 local comment_api = require('Comment.api')
 vim.keymap.set('n', '<Leader>/', comment_api.toggle.linewise.current)
 vim.keymap.set('x', '<Leader>/', '<Plug>(comment_toggle_linewise_visual)')
+
+-- Highlight trailing whitespaces and tabs
+vim.opt.list = true
+vim.opt.listchars = {tab = '»·', trail = '·'}
