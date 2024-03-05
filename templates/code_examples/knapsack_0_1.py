@@ -129,19 +129,19 @@ def knapsack_0_1_bottom_up_space_efficient(weights, values, max_weight, num_item
   dp = [(0, []) for _ in range(max_weight + 1)]
 
   # Taking first i elements
-  for i in range(1, num_items + 1):
+  for i in range(num_items):
 
     # Starting from back,
     # so that we also have data of
-    # previous computation when taking i - 1 items
+    # previous computation when taking i items
     for w in range(max_weight, 0, -1):
-      if weights[i - 1] <= w:
+      if weights[i] <= w:
 
         # Finding the maximum value
-        value0, items0 = dp[w - weights[i - 1]]
-        value0 += values[i - 1]
+        value0, items0 = dp[w - weights[i]]
+        value0 += values[i]
         items0 = items0.copy()
-        items0.append(i - 1)
+        items0.append(i)
 
         value1, items1 = dp[w]
 
