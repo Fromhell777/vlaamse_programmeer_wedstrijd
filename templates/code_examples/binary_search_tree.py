@@ -1,5 +1,5 @@
 
-class Binary_search_tree_node:
+class BinarySearchTreeNode:
 
   def __init__(self, val = None):
     self.left = None
@@ -21,14 +21,14 @@ class Binary_search_tree_node:
         self.left.insert(val)
         return
 
-      self.left = Binary_search_tree_node(val)
+      self.left = BinarySearchTreeNode(val)
       return
 
     if self.right:
       self.right.insert(val)
       return
 
-    self.right = Binary_search_tree_node(val)
+    self.right = BinarySearchTreeNode(val)
 
   def get_min(self):
     current = self
@@ -132,7 +132,7 @@ if __name__ == '__main__':
 
   values = [12, 6, 18, 19, 21, 11, 3, 5, 4, 24, 18]
 
-  bst = Binary_search_tree_node()
+  bst = BinarySearchTreeNode()
 
   for value in values:
     bst.insert(value)

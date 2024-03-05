@@ -32,15 +32,15 @@ def insert(root, x):
 
   return root
 
-def inOrder(root):
+def in_order_traversal(root):
   if root == None:
     return
 
-  inOrder(root.left)
+  in_order_traversal(root.left)
   print(root, end = "")
-  inOrder(root.right)
+  in_order_traversal(root.right)
 
-def isOverlapping(root, x):
+def is_overlapping(root, x):
   if root == None:
     # return a dummy interval range
     return Interval(-1, -1)
@@ -52,10 +52,10 @@ def isOverlapping(root, x):
 
   elif (root.left != None and root.left.max > x.low):
     # the overlapping node may be present in left child
-    return isOverlapping(root.left, x)
+    return is_overlapping(root.left, x)
 
   else:
-    return isOverlapping(root.right, x)
+    return is_overlapping(root.right, x)
 
 if __name__ == '__main__':
   root = None
@@ -67,8 +67,8 @@ if __name__ == '__main__':
   root = insert(root, Interval(30, 40))
 
   print("Inorder traversal of constructed Interval Tree is")
-  inOrder(root)
+  in_order_traversal(root)
   print()
   i = Interval(6, 7)
   print("Searching for interval", i)
-  print("Overlaps with ", isOverlapping(root, i))
+  print("Overlaps with ", is_overlapping(root, i))

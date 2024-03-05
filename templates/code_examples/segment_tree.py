@@ -20,7 +20,7 @@ class SegmentTree:
       self.tree[i] = self.tree[i << 1] + self.tree[(i << 1) | 1]
 
   # Function to update a tree node
-  def updateTreeNode(self, p, value):
+  def update_tree_node(self, p, value):
 
     # Set value at position p
     self.tree[p + self.size] = value
@@ -75,7 +75,7 @@ if __name__ == "__main__" :
     print(s.query(1, 3))
 
     # modify element at 2nd index
-    s.updateTreeNode(2, 1)
+    s.update_tree_node(2, 1)
 
     # print the sum in range(1,2) index-based
     print(s.query(1, 3))

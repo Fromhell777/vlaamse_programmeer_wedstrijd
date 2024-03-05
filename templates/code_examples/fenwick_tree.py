@@ -13,14 +13,14 @@ class FenwickTree:
 
     # Store the actual values in tree[] using update()
     for i in range(self.array_size):
-      self.updatebit(i, arr[i])
+      self.update_bit(i, arr[i])
 
   def __str__(self):
     return str(self.tree[1:self.array_size + 1])
 
   # Returns sum of arr[0..index]. This function assumes that the array is
   # preprocessed and partial sums of array elements are stored in tree[]
-  def getsum(self, index):
+  def get_sum(self, index):
     result = 0 # Initialize result
 
     # Index in tree[] is 1 more than the index in arr[]
@@ -39,11 +39,11 @@ class FenwickTree:
 
   # Function to get sum on interval [l, r]
   def query(self, l, r):
-    return self.getsum(r) - self.getsum(l - 1)
+    return self.get_sum(r) - self.get_sum(l - 1)
 
   # Updates a node in Binary Indexed Tree (BIT) at given index in tree. The
   # given added_value is added to tree[index] and all of its ancestors in tree
-  def updatebit(self, index, added_value):
+  def update_bit(self, index, added_value):
 
     # Index in tree[] is 1 more than the index in arr[]
     index += 1
@@ -63,8 +63,8 @@ if __name__ == "__main__" :
   a = [2, 1, 1, 3, 2, 3, 4, 5, 6, 7, 8, 9]
 
   tree = FenwickTree(a)
-  print(f"Sum of elements in arr[0..5] is {tree.getsum(5)}")
+  print(f"Sum of elements in arr[0..5] is {tree.get_sum(5)}")
 
   a[3] += 6
-  tree.updatebit(3, 6)
-  print(f"Sum of elements in arr[0..5] after update is {tree.getsum(5)}")
+  tree.update_bit(3, 6)
+  print(f"Sum of elements in arr[0..5] after update is {tree.get_sum(5)}")
