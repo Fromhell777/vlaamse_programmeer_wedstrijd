@@ -36,17 +36,14 @@ for t in range(test_cases):
 
     if len(win_data) == 0:
       return "gelijk", set()
-
-    if alice_turn and "alice" in win_data:
+    elif len(win_data) == 1:
+      return next(iter(win_data.keys())), next(iter(win_data.values()))
+    elif alice_turn and "alice" in win_data:
       return "alice", win_data["alice"]
     elif not alice_turn and "bob" in win_data:
       return "bob", win_data["bob"]
-    elif "gelijk" in win_data:
-      return "gelijk", set()
-    elif alice_turn:
-      return "bob", win_data["bob"]
     else:
-      return "alice", win_data["alice"]
+      return "gelijk", set()
 
   win_name, wins = solve(start, True)
 
