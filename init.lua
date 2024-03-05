@@ -187,7 +187,7 @@ vim.keymap.set('n', '<F1>', ":bp<CR>", {})
 vim.keymap.set('n', '<F2>', ":bn<CR>", {})
 vim.keymap.set('n', '<F3>', ":b#<CR>", {})
 
-vim.keymap.set('n', '<F4>', ":cd dirname %<CR>")
+vim.keymap.set('n', '<F4>', ":lcd `dirname %`<CR>")
 
 vim.keymap.set('c', "bd<CR>", "BufDel<CR>")
 
