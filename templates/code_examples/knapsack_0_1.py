@@ -154,12 +154,11 @@ def knapsack_0_1_bottom_up_space_efficient(weights, values, max_weight, num_item
 
 # Driver Code
 if __name__ == '__main__':
-    values = [60, 100, 120]
-    weights = [10, 20, 30]
-    max_weight = 50
+  values = [60, 100, 120]
+  weights = [10, 20, 30]
+  max_weight = 50
 
-    print(knapsack_0_1_bottom_up_space_efficient(max_weight = max_weight,
-                                                 weights = weights,
-                                                 values = values,
-                                                 num_items = len(values)))
- 
+  print(knapsack_0_1_bottom_up_space_efficient(max_weight = max_weight,
+                                               weights = weights,
+                                               values = values,
+                                               num_items = len(values)))

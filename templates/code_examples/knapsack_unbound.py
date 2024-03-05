@@ -185,12 +185,11 @@ def knapsack_unbound_optimized(weights, values, max_weight, num_items):
 
 # Driver Code
 if __name__ == '__main__':
-    values = [10, 30, 20]
-    weights = [5, 10, 15]
-    max_weight = 100
+  values = [10, 30, 20]
+  weights = [5, 10, 15]
+  max_weight = 100
 
-    print(knapsack_unbound_optimized(max_weight = max_weight,
-                                     weights = weights,
-                                     values = values,
-                                     num_items = len(values)))
-
+  print(knapsack_unbound_optimized(max_weight = max_weight,
+                                   weights = weights,
+                                   values = values,
+                                   num_items = len(values)))

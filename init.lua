@@ -192,7 +192,7 @@ vim.keymap.set('n', '<F4>', ":cd dirname %<CR>")
 vim.keymap.set('c', "bd<CR>", "BufDel<CR>")
 
 -- Trim trailing whitespaces
-vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]])
+vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<CR>:nohlsearch<CR>]])
 
 -- Comment.nvim keybindings
 local comment_api = require('Comment.api')
