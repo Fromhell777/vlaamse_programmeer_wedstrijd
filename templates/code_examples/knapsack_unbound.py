@@ -123,9 +123,9 @@ def knapsack_unbound_bottom_up_space_efficient(weights, values, max_weight, num_
           dp[w] = (value1, items1)
 
   return dp[max_weight]
- 
+
 def knapsack_unbound_optimized(weights, values, max_weight, num_items):
- 
+
   # Stores most dense item
   best_value_for_weight = 0
 
@@ -182,7 +182,7 @@ def knapsack_unbound_optimized(weights, values, max_weight, num_items):
     result_items = dp[index][1]
     result_items.extend([best_value_for_weight] * times)
     return (result_value, result_items)
- 
+
 # Driver Code
 if __name__ == '__main__':
     values = [10, 30, 20]
@@ -193,4 +193,4 @@ if __name__ == '__main__':
                                      weights = weights,
                                      values = values,
                                      num_items = len(values)))
- 
+
