@@ -1,5 +1,5 @@
 
-def knapsack_0_1_recursive(max_weight, weights, values, num_items):
+def knapsack_0_1_recursive(weights, values, max_weight, num_items):
 
   # Base Case
   if num_items == 0 or max_weight == 0:
