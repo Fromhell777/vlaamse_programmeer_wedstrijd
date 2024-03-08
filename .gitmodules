@@ -1,0 +1,3 @@
+[submodule "external/more_itertools"]
+	path = external/more_itertools
+	url = git@github.com:more-itertools/more-itertools.git
