@@ -21,7 +21,7 @@ def binary_search(values, elem):
   # If we reach here, then the element was not present
   return -1
 
-def binary_search_intert_right():
+def binary_search_insert_right():
 
   values = [2,5,6,8,9,14]
 
@@ -42,7 +42,7 @@ def binary_search_intert_right():
 
   values.insert(low, x)
 
-def binary_search_intert_left():
+def binary_search_insert_left():
 
   values = [2,5,6,8,9,14]
 
