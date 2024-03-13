@@ -95,6 +95,44 @@ def longest_increasing_subsequence(values):
 
   return longest_length, sequence
 
+def longest_increasing_subsequence_dp(values):
+  n = len(values)
+
+  # Declare the list (values) for LIS and initialize LIS values for all indexes
+  dp = [1] * n
+
+  # Compute optimized LIS values in bottom up manner
+  for i in range(1, n):
+    for j in range(0, i):
+      if values[i] > values[j] and dp[i] < dp[j] + 1:
+        dp[i] = dp[j] + 1
+
+  # Pick maximum of all LIS values
+  return max(dp)
+
+# Create a memoization matrix:
+# mem = [[None for _ in range(len(values) + 1)] for _ in range(len(values) + 1)]
+def longest_increasing_subsequence_recursive(index, prev_index, values):
+
+  if (index == len(values)):
+    return 0
+
+  if (mem[index][prev_index + 1] is not None):
+    return mem[index][prev_index + 1]
+
+  notTake = 0 + longest_increasing_subsequence_recursive(index      = index + 1,
+                                                         prev_index = prev_index,
+                                                         values     = values)
+
+  take = -1
+  if prev_index == -1 or values[index] > values[prev_index]:
+    take = 1 + longest_increasing_subsequence_recursive(index      = index + 1,
+                                                        prev_index = index,
+                                                        values     = values)
+
+  mem[index][prev_index + 1] = max(take, notTake)
+  return mem[index][prev_index + 1]
+
 # Driver Code
 if __name__ == '__main__':
   values = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
@@ -112,3 +150,19 @@ if __name__ == '__main__':
   print(f"\nInput sequence: {values}")
   print(f"The length of the longest increasing subsequence is: {result_length}")
   print(f"The longest increasing subsequence is: {result}")
+
+  values = [10, 22, 9, 33, 21, 50, 41, 60]
+
+  result = longest_increasing_subsequence_dp(values)
+
+  print(f"\nInput sequence: {values}")
+  print(f"The length of the longest increasing subsequence is: {result}")
+
+  mem = [[None for _ in range(len(values) + 1)] for _ in range(len(values) + 1)]
+  result = longest_increasing_subsequence_recursive(index      = 0,
+                                                    prev_index = -1,
+                                                    values     = values)
+
+  print(f"\nInput sequence: {values}")
+  print(f"The length of the longest increasing subsequence is: {result}")
+

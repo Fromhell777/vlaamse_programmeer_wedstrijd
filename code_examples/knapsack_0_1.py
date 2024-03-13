@@ -38,7 +38,7 @@ def knapsack_0_1_recursive_memoization(weights, values, max_weight, num_items):
   if num_items == 0 or max_weight == 0:
     return (0, [])
 
-  if mem[max_weight][num_items] != None:
+  if mem[max_weight][num_items] is not None:
     return mem[max_weight][num_items]
 
   # If weight of the nth item is more than knapsack of capacity max_weight, then
