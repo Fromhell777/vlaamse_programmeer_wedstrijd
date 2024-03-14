@@ -79,11 +79,48 @@ def build_suffix_array(txt):
     # Return the suffix array
     return suffix_array
 
+# Return indices from txt where the patter is located. Finding every occurrence
+# of the pattern is equivalent to finding every suffix that begins with the
+# substring
+def find_substring(txt, pattern, suffix_array):
+  # Find starting position of interval
+  low = 0
+  high = len(txt)
+  while low < high:
+    mid = (low + high) // 2
+
+    # txt[suffix_array[i]:] is the ith smallest suffix
+    if pattern > txt[suffix_array[mid]:]:
+      low = mid + 1
+    else:
+      high = mid
+
+  start = low
+
+  # Find ending position of interval
+  high = len(txt)
+  while low < high:
+    mid = (low + high) // 2
+
+    if txt[suffix_array[mid]:].startswith(pattern):
+      low = mid + 1
+    else:
+      high = mid
+
+  stop = high
+
+  return suffix_array[start:stop]
+
 # Driver code
 if __name__ == "__main__":
 
   txt = "banana"
+  pattern = "ana"
 
   suffix_array = build_suffix_array(txt)
+  pattern_indices = find_substring(txt          = txt,
+                                   pattern      = pattern,
+                                   suffix_array = suffix_array)
 
-  print(f"The suffix array for \"{txt}\" is: {suffix_array}")
+  print(f"The pattern \"{pattern}\" in \"{txt}\" is located at the " + \
+        f"following indices: {pattern_indices}")
