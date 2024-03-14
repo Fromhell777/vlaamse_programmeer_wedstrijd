@@ -57,7 +57,7 @@ def is_overlapping(root, x):
   else:
     return is_overlapping(root.right, x)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
   root = None
   root = insert(None, Interval(15, 20))
   root = insert(root, Interval(10, 30))
