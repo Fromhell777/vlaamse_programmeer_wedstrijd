@@ -53,8 +53,6 @@ for t in range(test_cases):
 
     reachable_numbers.update(new_reachable_numbers)
 
-  print(len(reachable_numbers))
-
   if 0 in reachable_numbers:
     print(f"{t + 1} {reachable_numbers[0]}")
   else:

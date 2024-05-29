@@ -29,28 +29,18 @@ std::string spaces = " \t";
 inline v1d split_to_numbers(std::string const & line) {
   v1d result;
   std::string::size_type pos = 0;
-  pos = 0;
-  u32 val = 0;
   u32 ls = line.size();
-  while (pos <= ls) {
-
+  while (pos < ls) {
     while (pos < ls && line[pos] == ' ') {
       ++pos;
     }
 
-    val = val * 10 + line[pos] - '0';
-    ++pos;
-
-    if (pos >= ls) {
-      result.push_back(val);
-      break;
-    } else if (line[pos] == ' ') {
-      result.push_back(val);
-    } else {
-      continue;
+    std::int32_t val = 0;
+    while (pos < ls and line[pos] != ' ') {
+      val = val * 10 + line[pos] - '0';
+      ++pos;
     }
-
-    val = 0;
+    result.emplace_back(val);
   }
 
   return result;
