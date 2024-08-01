@@ -53,16 +53,14 @@ class SuffixTree:
     self.last_new_node = None
     self.active_node = None
 
-    # active_edge is represeted as input txt character index (not the character
+    # Active_edge is represeted as input txt character index (not the character
     # itself)
     self.active_edge = -1
     self.active_length = 0
 
-    # remaining_suffix_count tells how many suffixes yet to be added in tree
+    # Remaining_suffix_count tells how many suffixes yet to be added in tree
     self.remaining_suffix_count = 0
 
-    self.root_end = None
-    self.split_end = None
     self.size = len(txt)
     self.root = None
 
@@ -117,7 +115,7 @@ class SuffixTree:
     # Add all suffixes (yet to be added) one by one in tree
     while (self.remaining_suffix_count > 0):
       if (self.active_length == 0):
-        # Active_Point Change For Active Lenght Zero (APCFALZ)
+        # Active_Point Change For Active Length Zero (APCFALZ)
         self.active_edge = pos
 
       # There is no outgoing edge starting with
@@ -168,14 +166,14 @@ class SuffixTree:
         # (we fall off the tree). In this case, we add a new internal node and
         # a new leaf edge going out of that new node. This is Extension Rule 2,
         # where a new leaf edge and a new internal node get created
-        self.split_end = next_node.start + self.active_length - 1
+        split_end = next_node.start + self.active_length - 1
 
         # New internal node
-        split = self.new_node(next_node.start, self.split_end)
+        split = self.new_node(next_node.start, split_end)
         self.active_node.children[self.txt[self.active_edge]] = split
 
         # New leaf coming out of new internal node
-        split.children[self.txt[pos]] = self.new_node(pos, leaf=True)
+        split.children[self.txt[pos]] = self.new_node(pos, leaf = True)
         next_node.start += self.active_length
         split.children[self.txt[next_node.start]] = next_node
 
@@ -230,8 +228,7 @@ class SuffixTree:
   def build_suffix_tree(self):
     # Root is a special node with start and end indices as -1, as it has no
     # parent from where an edge comes to root
-    self.root_end = -1
-    self.root = self.new_node(-1, self.root_end)
+    self.root = self.new_node(start = -1, end = -1)
 
     # First active_node will be root
     self.active_node = self.root
