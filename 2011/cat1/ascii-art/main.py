@@ -1,5 +1,3 @@
-import copy
-
 test_cases = int(input())
 
 for _ in range(test_cases):
@@ -55,7 +53,3 @@ for _ in range(test_cases):
       rotation += 90
       sub_art = rotate(sub_art)
       num_sub_rows, num_sub_cols = num_sub_cols, num_sub_rows
-
-
-
-
