@@ -141,9 +141,8 @@ cmp.setup({
 
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local lspconfig = require('lspconfig')
 local clangd_command = 'clangd'
-lspconfig.clangd.setup({
+vim.lsp.config("clangd", {
   cmd = {
     'clangd',
     '--clang-tidy',
@@ -153,7 +152,7 @@ lspconfig.clangd.setup({
   filetypes = { 'cpp', 'c' },
   capabilities = cmp_capabilities
 })
-lspconfig.pyright.setup({})
+vim.lsp.config("pyright", {})
 
 local telescope_builtin = require('telescope.builtin')
 
