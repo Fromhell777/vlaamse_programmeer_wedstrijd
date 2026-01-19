@@ -152,7 +152,9 @@ vim.lsp.config("clangd", {
   filetypes = { 'cpp', 'c' },
   capabilities = cmp_capabilities
 })
+vim.lsp.enable({"clangd"})
 vim.lsp.config("pyright", {})
+vim.lsp.enable({"pyright"})
 
 local telescope_builtin = require('telescope.builtin')
 
