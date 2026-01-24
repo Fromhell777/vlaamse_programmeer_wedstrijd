@@ -5,6 +5,8 @@ vim.opt.tabstop = 8
 vim.opt.expandtab = true
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.numberwidth = 4
+vim.opt.signcolumn = "yes"
 
 -- Install Lazy plugin manager
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
