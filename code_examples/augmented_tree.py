@@ -46,7 +46,7 @@ def is_overlapping(root, x):
     return Interval(-1, -1)
 
   # if x overlaps with root's interval
-  if (x.low > root.range.low and x.low < root.range.high or \
+  if ((x.low > root.range.low and x.low < root.range.high) or \
       (x.high > root.range.low and x.high < root.range.high)):
     return root.range
 
