@@ -6,14 +6,13 @@ def directed_graph_cycle_detection(graph):
   # indegrees as 0. This count the amount of incomming edges
   in_degrees = {k : 0 for k in graph.keys()}
 
-  # Traverse adjacency lists to fill indegrees of
-  # vertices.  This step takes O(V + E) time
+  # Traverse adjacency lists to fill indegrees of vertices. This step takes
+  # O(V + E) time
   for node in graph.keys():
     for adjacent_node in graph[node]:
       in_degrees[adjacent_node] += 1
 
-  # Create an queue and enqueue all vertices with
-  # indegree 0
+  # Create an queue and enqueue all vertices with indegree 0
   queue = Queue()
   for node, in_degree in in_degrees.items():
     if in_degree == 0:
