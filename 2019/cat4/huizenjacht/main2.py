@@ -69,4 +69,4 @@ for case in range(cases):
         # d = max(abs(closest[ai][0] - b[0]) + abs(closest[ai][1] - b[1]) for ai in range(n) for b in closest[:ai])
         best = min(best, curr)
 
-    print(case, best)
+    print(case + 1, best)
