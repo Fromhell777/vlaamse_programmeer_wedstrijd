@@ -7,7 +7,7 @@ def topological_sort(graph):
   in_degrees = {k : 0 for k in graph.keys()}
 
   # Traverse adjacency lists to fill indegrees of
-  # vertices.  This step takes O(V + E) time
+  # vertices. This step takes O(V + E) time
   for node in graph.keys():
     for adjacent_node in graph[node]:
       in_degrees[adjacent_node] += 1
