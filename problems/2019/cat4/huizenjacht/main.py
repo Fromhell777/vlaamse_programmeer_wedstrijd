@@ -8,62 +8,69 @@ for t in range(test_cases):
 
   houses = []
   for _ in range(num_houses):
-    data = [int(x) for x in input().split()]
-    houses.append(tuple(data))
+    x, y = [int(x) for x in input().split()]
+    # Transform the Manhattan distance into the Chebyshev distance. This
+    # transforms the diamond shape area into a square shape area to check on the grid
+    houses.append((x + y, x - y))
 
   houses.sort()
 
-  distances = [[0] * num_houses for _ in range(num_houses)]
-  for i in range(num_houses):
-    for j in range(num_houses):
-      house0 = houses[i]
-      house1 = houses[j]
-      dist = abs(house0[0] - house1[0]) + abs(house0[1] - house1[1])
-      distances[i][j] = dist
-      distances[j][i] = dist
+  min_x = math.inf
+  max_x = 0
+  min_y = math.inf
+  max_y = 0
+  for house in houses:
+    min_x = min(min_x, house[0])
+    max_x = max(max_x, house[0])
+    min_y = min(min_y, house[1])
+    max_y = max(max_y, house[1])
 
-  result = math.inf
+  max_square = max(max_x - min_x, max_y - min_y)
 
-  for house_index in range(num_houses):
+  def is_square_large_enough(size):
 
-    current_set = set()
-    current_set.add(house_index)
+    x_right_index = 0
+    for x_left_index in range(0, num_houses):
+      while x_right_index < num_houses and \
+            houses[x_right_index][0] - houses[x_left_index][0] <= size:
+        x_right_index += 1
 
-    last_house_added = house_index
-    houses_last_dist = [0] * num_houses
+      x_right_index -= 1
 
-    set_worst_dist = 0
+      slice_houses = houses[x_left_index:x_right_index + 1].copy()
+      slice_houses.sort(key = lambda x: x[1])
 
-    test_houses = set([i for i in range(num_houses)])
-    test_houses = test_houses - current_set
+      y_right_index = 0
+      for y_left_index in range(0, len(slice_houses)):
 
-    while len(current_set) < num_select:
-      min_dist = math.inf
-      best_house = -1
-      houses_to_remove = set()
-      for new_house_index in test_houses:
-        worst_dist = houses_last_dist[new_house_index]
-        worst_dist = max(worst_dist, distances[new_house_index][last_house_added])
-        houses_last_dist[new_house_index] = worst_dist
+        while y_right_index < len(slice_houses) and \
+              slice_houses[y_right_index][1] - slice_houses[y_left_index][1] <= size:
+          y_right_index += 1
 
-        if worst_dist >= result:
-          houses_to_remove.add(new_house_index)
+        y_right_index -= 1
 
-        if worst_dist < min_dist:
-          best_house = new_house_index
-          min_dist = worst_dist
+        if y_right_index - y_left_index + 1 >= num_select:
+          return True
 
-      current_set.add(best_house)
-      set_worst_dist = min_dist
-      last_house_added = best_house
+        if y_right_index + 1 == len(slice_houses):
+          break
 
-      if set_worst_dist >= result:
-        break
-
-      test_houses.remove(best_house)
-      test_houses = test_houses - houses_to_remove
+      if x_right_index + 1 == num_houses:
+        return False
 
 
-    result = min(result, set_worst_dist)
+  # Binary search the square size that still contains the desired number of houses
+  low = 0
+  high = max_square
+  mid = 0
 
-  print(f"{t + 1} {result}")
+  while low < high:
+
+    mid = (high + low) // 2
+
+    if is_square_large_enough(mid):
+      high = mid
+    else:
+      low = mid + 1
+
+  print(f"{t + 1} {low}")
