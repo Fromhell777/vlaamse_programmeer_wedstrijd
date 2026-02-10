@@ -16,17 +16,12 @@ def floyd_warshall(costs, num_vertices):
 
   # Initialise the distance matrix with the edge weights
   for i in range(num_vertices):
-    for j in range(num_vertices):
-      # Fill in weigths for the edge (i, j)
-      if i == j:
-        dist[i][j] = 0
-        prev[i][j] = i
+    dist[i][i] = 0
+    prev[i][i] = i
 
-      if (i, j) in costs:
-        dist[i][j] = costs[(i, j)]
-        prev[i][j] = i
-      else:
-        dist[i][j] = INF
+  for (i, j), cost in costs.items():
+    dist[i][j] = cost
+    prev[i][j] = i
 
   # Add all vertices one by one to the set of intermediate vertices.
   # 1) Before start of an iteration, we have the shortest distances between
