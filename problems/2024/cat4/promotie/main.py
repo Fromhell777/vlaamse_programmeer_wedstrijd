@@ -14,8 +14,6 @@ for t in range(test_cases):
   for i in range(1, len(a)):
     data_map[a[i]] = a[i - 1]
 
-  min_value = min(set_data)
-
   result = f"{t+1}"
   for e in data:
     if e in data_map:
