@@ -4,3 +4,4 @@ test.txt
 cmaMakefile*
 program
 __pycache__/
+target/
