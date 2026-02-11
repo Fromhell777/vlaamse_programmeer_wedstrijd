@@ -5,3 +5,4 @@ cmaMakefile*
 program
 __pycache__/
 target/
+*.zip
