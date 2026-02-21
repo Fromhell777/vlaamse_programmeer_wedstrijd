@@ -1,5 +1,3 @@
-import random
-
 test_cases = int(input())
 
 for t in range(test_cases):
@@ -43,25 +41,25 @@ for t in range(test_cases):
       if i > 0:
         adjacent_value = matrix[i - 1][j]
         if not ((i, j) in start_positions and (i - 1, j) in start_positions):
-          if adjacent_value != value and (i - 1, j):
+          if adjacent_value != value:
             connections[value].add(adjacent_value)
       if i + 1 < y_size:
         adjacent_value = matrix[i + 1][j]
         if not ((i, j) in start_positions and (i + 1, j) in start_positions):
-          if adjacent_value != value and (i + 1, j):
+          if adjacent_value != value:
             connections[value].add(adjacent_value)
       if j > 0:
         adjacent_value = matrix[i][j - 1]
         if not ((i, j) in start_positions and (i, j - 1) in start_positions):
-          if adjacent_value != value and (i, j - 1):
+          if adjacent_value != value:
             connections[value].add(adjacent_value)
       if j + 1 < x_size:
         adjacent_value = matrix[i][j + 1]
         if not ((i, j) in start_positions and (i, j + 1) in start_positions):
-          if adjacent_value != value and (i, j + 1):
+          if adjacent_value != value:
             connections[value].add(adjacent_value)
 
-  max_vhdl = 0
+  max_vdhl = 0
   curr_vdhl = 0
 
   solo_nodes = [k for k,v in connections.items() if len(v) == 1]
@@ -102,10 +100,10 @@ for t in range(test_cases):
     chains[solo_node] = length
 
   if len(chains) > 0 and next(iter(chains.values())) == len(connections):
-    max_vhdl = next(iter(chains.values())) // 2
+    max_vdhl = next(iter(chains.values())) // 2
     if next(iter(chains.values())) % 2 == 1:
-      max_vhdl += 1
-    print(f"{t + 1} {max_vhdl}")
+      max_vdhl += 1
+    print(f"{t + 1} {max_vdhl}")
     continue
 
   max_chain_score = 0
@@ -113,17 +111,17 @@ for t in range(test_cases):
     max_chain_score += length
 
   def color(colors, visited, to_visit):
-    global max_vhdl
+    global max_vdhl
     global curr_vdhl
 
-    if len(to_visit) + curr_vdhl + max_chain_score > max_vhdl:
+    if len(to_visit) + curr_vdhl + max_chain_score > max_vdhl:
       curr_node = to_visit.pop()
       visited.add(curr_node)
       adjacent_colors = 0
       for node in connections[curr_node]:
         adjacent_colors += colors[node]
 
-      copy_vhdl = curr_vdhl
+      copy_vdhl = curr_vdhl
 
       if adjacent_colors == 0:
         colors[curr_node] = 1
@@ -136,9 +134,9 @@ for t in range(test_cases):
         if len(to_visit) > 0:
           color(colors, visited, to_visit)
 
-      max_vhdl = max(curr_vdhl, max_vhdl)
+      max_vdhl = max(curr_vdhl, max_vdhl)
 
-      curr_vdhl = copy_vhdl
+      curr_vdhl = copy_vdhl
 
       colors[curr_node] = 0
 
@@ -148,7 +146,7 @@ for t in range(test_cases):
           if chains[node] % 2 == 1:
             curr_vdhl += 1
 
-      max_vhdl = max(curr_vdhl, max_vhdl)
+      max_vdhl = max(curr_vdhl, max_vdhl)
 
       if len(to_visit) > 0:
         color(colors, visited, to_visit)
@@ -158,4 +156,4 @@ for t in range(test_cases):
 
   color({k : 0 for k in connections.keys()}, set(), to_visit)
 
-  print(f"{t + 1} {max_vhdl}")
+  print(f"{t + 1} {max_vdhl}")
