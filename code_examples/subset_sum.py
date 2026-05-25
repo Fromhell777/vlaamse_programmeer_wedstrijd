@@ -157,6 +157,39 @@ def is_subset_sum_unbound_bottom_up_space_efficient(values, desired_sum):
   # If desired_sum is possible return True else False
   return dp[desired_sum]
 
+def find_subsets_unbound(values, index, desired_sum, current_set, result):
+  if index >= len(values):
+
+    # If we reach the end and the desired_sum becomes 0, we found a valid
+    # subset
+    if desired_sum == 0:
+      result.append(current_set[:])
+      return
+
+    # Otherwise, we return as no valid subset is found
+    return
+
+  i = 1
+  while i * values[index] <= desired_sum:
+    # Include current element in subset
+    current_set.extend([values[index]] * i)
+    find_subsets(values, index + 1, desired_sum - i * values[index], current_set, result)
+
+    # Backtrack and exclude the current element
+    for _ in range(i):
+      current_set.pop()
+
+    i += 1
+
+  find_subsets(values, index + 1, desired_sum, current_set, result)
+
+# Function to find all subsets summing to desired_sum
+def find_subsets_unbound_wrapper(values, desired_sum):
+    result = []
+    curr = []
+    find_subsets_unbound(values, 0, desired_sum, curr, result)
+    return result
+
 # Driver Code
 if __name__ == '__main__':
   values = [3, 34, 4, 12, 5, 2]
@@ -178,3 +211,8 @@ if __name__ == '__main__':
   print(is_subset_sum_unbound_recursive(values, len(values), desired_sum))
   print(is_subset_sum_unbound_bottom_up(values, desired_sum))
   print(is_subset_sum_unbound_bottom_up_space_efficient(values, desired_sum))
+
+  values = [5, 2, 3, 10, 6, 8]
+  desired_sum = 10
+
+  print(find_subsets_unbound_wrapper(values, desired_sum))
