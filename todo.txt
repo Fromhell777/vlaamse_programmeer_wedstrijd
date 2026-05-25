@@ -1,2 +1,2 @@
 * Fix the generalised suffix tree code example
-* Look into other hashing methods for dicts and sets
+* Solve problems from other years
