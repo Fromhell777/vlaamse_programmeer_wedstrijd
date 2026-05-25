@@ -2,6 +2,9 @@ export DESIGN_WORK_DIR=`pwd`
 
 alias cw='cd $DESIGN_WORK_DIR'
 
+alias setup_python='cp $DESIGN_WORK_DIR/templates/main.py ./'
+alias setup_cpp='cp $DESIGN_WORK_DIR/templates/main.cpp ./'
+
 alias run_opgave='python3 main.py < opgave.invoer'
 alias run_voorbeeld='python3 main.py < voorbeeld.invoer'
 alias run_wedstrijd='python3 main.py < wedstrijd.invoer'
